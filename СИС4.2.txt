@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+11
 int main() {
     setlocale(0, "");
     while (true) {
