@@ -319,3 +319,109 @@ int main()
     return 0;
 
 }
+
+Хорошо, давайте создадим базу данных на C# в консольном приложении и подключим ее к SQL.
+
+Вот пошаговое руководство:
+
+Создайте новое консольное приложение C#.
+
+Добавьте необходимые NuGet-пакеты для работы с базой данных. Для этого в Visual Studio откройте «Диспетчер пакетов NuGet» и установите пакет System.Data.SqlClient.
+
+Создайте класс, который будет представлять Вашу модель данных. Например, класс User:
+
+public class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+}
+Создайте класс DatabaseManager, который будет отвечать за взаимодействие с базой данных:
+using System.Data.SqlClient;
+
+public class DatabaseManager
+{
+    private readonly string _connectionString;
+
+    public DatabaseManager(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
+    public void CreateTable()
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            string query = "CREATE TABLE Users (Id INT PRIMARY KEY, Name VARCHAR(50), Email VARCHAR(50))";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
+    }
+
+    public void InsertUser(User user)
+    {
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            string query = "INSERT INTO Users (Id, Name, Email) VALUES (@Id, @Name, @Email)";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Id", user.Id);
+            command.Parameters.AddWithValue("@Name", user.Name);
+            command.Parameters.AddWithValue("@Email", user.Email);
+            command.ExecuteNonQuery();
+        }
+    }
+
+    public List<User> GetUsers()
+    {
+        List<User> users = new List<User>();
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            string query = "SELECT Id, Name, Email FROM Users";
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                User user = new User
+                {
+                    Id = (int)reader["Id"],
+                    Name = (string)reader["Name"],
+                    Email = (string)reader["Email"]
+                };
+                users.Add(user);
+            }
+        }
+        return users;
+    }
+}
+В Program.cs, создайте экземпляр DatabaseManager и используйте его для взаимодействия с базой данных:
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string connectionString = "Data Source=YourServerName;Initial Catalog=YourDatabaseName;User ID=YourUsername;Password=YourPassword";
+        DatabaseManager databaseManager = new DatabaseManager(connectionString);
+
+        // Создание таблицы
+        databaseManager.CreateTable();
+
+        // Вставка пользователей
+        databaseManager.InsertUser(new User { Id = 1, Name = "John Doe", Email = "john.doe@example.com" });
+        databaseManager.InsertUser(new User { Id = 2, Name = "Jane Smith", Email = "jane.smith@example.com" });
+
+        // Получение пользователей
+        var users = databaseManager.GetUsers();
+        foreach (var user in users)
+        {
+            Console.WriteLine($"ID: {user.Id}, Name: {user.Name}, Email: {user.Email}");
+        }
+    }
+}
+Не забудьте заменить "YourServerName", "YourDatabaseName", "YourUsername" и "YourPassword" на Ваши фактические данные для подключения к SQL-серверу.
+
+Это базовый пример, который создает таблицу Users, вставляет в нее два пользователя и выводит их на консоль. Вы можете расширить этот код, добавив дополнительные методы для обновления, удаления и других операций с данными.
+
