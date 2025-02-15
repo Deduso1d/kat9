@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Информация о Dota 2</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #1e1e1e;
+        color: #ffffff;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #ffcc00;
+        margin-bottom: 20px;
+      }
+      .heroes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero {
+        background-color: #2e2e2e;
+        border: 1px solid #444;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        transition: transform 0.2s;
+        width: 180px; /* Увеличен размер блока */
+      }
+      .hero:hover {
+        transform: scale(1.05);
+      }
+      .hero img {
+        width: 120px; /* Увеличен размер изображения */
+        height: 120px; /* Увеличен размер изображения */
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Добавлена тень */
+      }
+      .hero-name {
+        margin-top: 5px;
+        font-weight: bold;
+      }
+      .button {
+        display: inline-block;
+        background-color: #ffcc00;
+        color: #1e1e1e;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+        text-align: center;
+      }
+      .button:hover {
+        background-color: #e6b800;
+      }
+      @media (max-width: 600px) {
+        .heroes {
+          flex-direction: column;
+          align-items: center;
+        }
+        .hero {
+          width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Информация о Dota 2</h1>
+
+    <div class="heroes">
+      <div class="hero">
+        <a href="anti_mage.html">
+          <img src="images/anti_mage.png" alt="Anti-Mage" />
+          <div class="hero-name">Anti-Mage</div>
+        </a>
+      </div>
+      <div class="hero">
+        <a href="axe.html">
+          <img src="images/axe.png" alt="Axe" />
+          <div class="hero-name">Axe</div>
+        </a>
+      </div>
+      <div class="hero">
+        <a href="invoker.html">
+          <img src="images/invoker.png" alt="Invoker" />
+          <div class="hero-name">Invoker</div>
+        </a>
+      </div>
+      <div class="hero">
+        <a href="pudge.html">
+          <img src="images/pudge.png" alt="Pudge" />
+          <div class="hero-name">Pudge</div>
+        </a>
+      </div>
+      <div class="hero">
+        <a href="bristleback.html">
+          <img src="images/bristleback.png" alt="Bristleback" />
+          <div class="hero-name">Bristleback</div>
+        </a>
+      </div>
+      <div class="hero">
+        <a href="earthshaker.html">
+          <img src="images/earthshaker.png" alt="Earthshaker" />
+          <div class="hero-name">Earthshaker</div>
+        </a>
+      </div>
+      <div class="hero">
+        <a href="treant.html">
+          <img src="images/treant.png" alt="Treant Protector" />
+          <div class="hero-name">Treant Protector</div>
+        </a>
+      </div>
+      <div class="hero">
+        <a href="shaman.html">
+          <img src="images/shaman.png" alt="Shaman" />
+          <div class="hero-name">Shaman</div>
+        </a>
+      </div>
+    </div>
+
+    <a href="index.html" class="button">Назад к списку персонажей</a>
+  </body>
+</html>
